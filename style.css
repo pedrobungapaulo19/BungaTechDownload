@@ -1,0 +1,350 @@
+/* Paleta de Cores */
+:root {
+    --cor-principal: #007bff;        /* Azul Vibrante (Download Button) */
+    --cor-secundaria: #0056b3;      /* Azul Escuro (Hover) */
+    --cor-fundo: #f0f2f5;           /* Cinza/Azul Claro Suave */
+    --cor-texto-escuro: #333;
+    --cor-texto-claro: #fff;
+    --sombra-card: 0 5px 15px rgba(0, 0, 0, 0.08); 
+    --sombra-botao: 0 4px 10px rgba(0, 123, 255, 0.4); 
+}
+
+/* 1. RESET BÁSICO E TIPOGRAFIA */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto-escuro);
+    line-height: 1.6;
+}
+
+/* 2. CABEÇALHO (HEADER) */
+header {
+    background-color: var(--cor-texto-claro);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    padding: 20px 40px;
+    text-align: center;
+}
+
+header h1 {
+    color: var(--cor-principal);
+    font-size: 2.2em;
+    font-weight: 600;
+}
+
+/* 3. FILTROS E BUSCA */
+#filtros {
+    padding: 40px 20px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#barra-busca {
+    width: 100%;
+    max-width: 600px;
+    padding: 12px 20px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    font-size: 1em;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#barra-busca:focus {
+    border-color: var(--cor-principal);
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+}
+
+#botoes-filtro {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; 
+    gap: 10px;
+}
+
+.filtro-btn {
+    background-color: #e9ecef; 
+    color: var(--cor-texto-escuro);
+    border: none;
+    padding: 8px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: background-color 0.3s, color 0.3s, transform 0.1s;
+    outline: none;
+}
+
+.filtro-btn:hover {
+    background-color: #dee2e6;
+}
+
+.filtro-btn.ativo {
+    background-color: var(--cor-principal);
+    color: var(--cor-texto-claro);
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
+}
+
+.filtro-btn.ativo:hover {
+    background-color: var(--cor-secundaria);
+}
+
+
+/* 4. LISTA DE APLICATIVOS (LAYOUT FLEXBOX) */
+#lista-apps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    gap: 35px; 
+    padding: 20px 40px 60px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/* 5. CARTÃO DE APLICATIVO */
+.app-card {
+    background-color: var(--cor-texto-claro);
+    border-radius: 12px;
+    box-shadow: var(--sombra-card);
+    padding: 30px;
+    width: 320px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.app-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); 
+}
+
+/* ÍCONE DO APP */
+.app-card img {
+    width: 90px;
+    height: 90px;
+    border-radius: 20px; 
+    object-fit: cover;
+    margin-bottom: 20px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1); 
+}
+
+/* TÍTULOS E TEXTOS */
+.app-card h2 {
+    font-size: 1.4em;
+    color: var(--cor-texto-escuro);
+    margin-bottom: 10px;
+}
+
+.app-card p {
+    font-size: 0.95em;
+    color: #666;
+    margin-bottom: 15px;
+    height: 60px; /* Altura fixa para manter os cards uniformes */
+    overflow: hidden;
+}
+
+.versao {
+    display: inline-block;
+    font-size: 0.8em;
+    color: var(--cor-principal);
+    background-color: rgba(0, 123, 255, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+/* BOTÃO DE DOWNLOAD */
+.btn-download {
+    display: block;
+    background-color: var(--cor-principal);
+    color: var(--cor-texto-claro);
+    padding: 12px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 700;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: var(--sombra-botao); 
+}
+
+.btn-download:hover {
+    background-color: var(--cor-secundaria);
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.6);
+}
+
+
+/* 6. RODAPÉ (FOOTER) */
+footer {
+    background-color: #222;
+    color: #ccc;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9em;
+}
+
+/* 7. RESPONSIVIDADE (PARA TELAS PEQUENAS) */
+@media (max-width: 768px) {
+    header, #lista-apps {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    #filtros {
+        padding-top: 20px;
+    }
+    
+    .app-card {
+        width: 100%; 
+        max-width: 350px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* 4. PERFIL DO ADMIN/DESENVOLVEDOR */
+#perfil-admin {
+    padding: 50px 20px;
+    background-color: var(--cor-texto-claro); /* Fundo branco ou claro */
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Sombra suave para separar */
+}
+
+.perfil-conteudo {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.foto-perfil {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* Transforma a imagem em um círculo */
+    object-fit: cover;
+    border: 5px solid var(--cor-principal); /* Borda azul para destaque */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+
+.info-perfil h3 {
+    font-size: 1.8em;
+    color: var(--cor-texto-escuro);
+    margin-bottom: 15px;
+}
+
+.info-perfil p {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.links-sociais {
+    margin-top: 20px;
+}
+
+.links-sociais a {
+    display: inline-block;
+    margin-right: 15px;
+    color: var(--cor-principal);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.links-sociais a:hover {
+    color: var(--cor-secundaria);
+    text-decoration: underline;
+}
+
+
+
+/* --- ESTILOS ESPECÍFICOS PARA O BUNGA TECH SCANNER (DESTAQUE) --- */
+
+.scanner-destaque {
+    /* Cores de destaque inspiradas no seu logo (azul/verde neon) */
+    border: 3px solid #00c6ff; /* Borda de destaque azul claro */
+    background: linear-gradient(145deg, #f0f8ff, #ffffff); /* Fundo sutilmente degradê */
+    box-shadow: 0 8px 20px rgba(0, 198, 255, 0.4); /* Sombra mais intensa */
+    transform: scale(1.05); /* Levemente maior que os outros cards */
+}
+
+.scanner-destaque:hover {
+    transform: scale(1.08) translateY(-8px); /* Destaque maior no hover */
+    box-shadow: 0 15px 30px rgba(0, 198, 255, 0.6);
+}
+
+/* Botão de download especial (para diferenciar do azul padrão) */
+.btn-scanner {
+    background-color: #00c6ff; /* Azul Ciano/Neon */
+    box-shadow: 0 4px 10px rgba(0, 198, 255, 0.5);
+}
+
+.btn-scanner:hover {
+    background-color: #00a4d4;
+    box-shadow: 0 6px 15px rgba(0, 198, 255, 0.8);
+}
+
+/* Mensagem de aviso de segurança (Importante!) */
+.aviso-seguranca {
+    font-size: 0.75em;
+    color: #cc0000; /* Cor de Alerta Vermelha */
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+
+
+.hospede {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5px; /* Ajuste a altura conforme necessário */
+}
+
+.hospede a {
+  text-decoration: none;
+  padding: 10px 20px;
+  border: 2px solid #ADD8E6; /* Azul claro */
+  border-radius: 5px;
+  background-color: var(--cor-principal);
+    color: var(--cor-texto-claro);
+  font-size: 16px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.hospede a:hover {
+  background-color: #ADD8E6; /* Azul claro */
+  color: #fff; /* Branco */
+}
+
+
+
+/* Responsividade do Perfil */
+@media (max-width: 768px) {
+    .perfil-conteudo {
+        flex-direction: column; /* Empilha a foto e o texto */
+        text-align: center;
+    }
+
+    .foto-perfil {
+        margin-bottom: 20px;
+    }
+}

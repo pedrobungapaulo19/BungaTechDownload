@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload de Aplicativos</title>
+  <link rel="stylesheet" href="estrutura.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Upload de Aplicativos</h1>
+    <form id="upload-form">
+      <div class="form-group">
+        <label for="imagem">Imagem do Aplicativo:</label>
+        <input type="file" id="imagem" name="imagem" accept="image/*">
+      </div>
+      <div class="form-group">
+        <label for="nome">Nome do Aplicativo:</label>
+        <input type="text" id="nome" name="nome">
+      </div>
+      <div class="form-group">
+        <label for="arquivo">Arquivo do Aplicativo:</label>
+        <input type="file" id="arquivo" name="arquivo" accept=".apk, .exe">
+      </div>
+      <div class="form-group">
+        <label for="descricao">Descrição do Aplicativo:</label>
+        <textarea id="descricao" name="descricao"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="versao">Versão do Aplicativo:</label>
+        <input type="text" id="versao" name="versao">
+      </div>
+      <button type="submit">Upload</button>
+    </form>
+  </div>
+
+  <script src="upload.js"></script>
+  <script>
+      
+      const express = require('express');
+const app = express();
+const firebase = require('firebase-admin');
+const storage = firebase.storage();
+
+app.post('/upload', (req, res) => {
+  const { nome, descricao, versao } = req.body;
+  const arquivo = req.files.arquivo;
+  const imagem = req.files.imagem;
+
+  // Salvar o arquivo e a imagem no Firebase Storage
+  const arquivoRef = storage.ref(`aplicativos/${arquivo.name}`);
+  const imagemRef = storage.ref(`imagens/${imagem.name}`);
+
+  arquivoRef.put(arquivo.data).then(() => {
+    imagemRef.put(imagem.data).then(() => {
+      // Salvar os dados do aplicativo no Firestore
+      const db = firebase.firestore();
+      db.collection('aplicativos').add({
+        nome,
+        descricao,
+        versao,
+        arquivo: arquivoRef.fullPath,
+        imagem: imagemRef.fullPath,
+      }).then(() => {
+        res.json({ message: 'Aplicativo enviado com sucesso!' });
+      });
+    });
+  });
+});
+
+app.get('/aplicativos', (req, res) => {
+  const db = firebase.firestore();
+  db.collection('aplicativos').get().then((querySnapshot) => {
+    const aplicativos = [];
+    querySnapshot.forEach((doc) => {
+      aplicativos.push(doc.data());
+    });
+    res.json(aplicativos);
+  });
+});
+      
+      
+      
+      fetch('/api/aplicativos')
+  .then((response) => response.json())
+  .then((aplicativos) => {
+    const listaAplicativos = document.getElementById('lista-apps');
+    aplicativos.forEach((aplicativo) => {
+      const item = document.createElement('div');
+      item.classList.add('app-card');
+      item.innerHTML = `
+        <img src="${aplicativo.imagem}" alt="${aplicativo.nome}">
+        <h2>${aplicativo.nome}</h2>
+        <p>${aplicativo.descricao}</p>
+        <span class="versao">V ${aplicativo.versao}</span>
+        <a href="${aplicativo.arquivo}" download class="btn-download">Baixar</a>
+      `;
+      listaAplicativos.appendChild(item);
+    });
+  });
+  </script>
+</body>
+</html>
