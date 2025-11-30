@@ -348,3 +348,46 @@ footer {
         margin-bottom: 20px;
     }
 }
+
+
+/* Botão flutuante para jogar */
+.btn-quiz {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 15px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.btn-quiz:hover {
+  transform: scale(1.1);
+  background: #20b954;
+}
+
+/* Botão flutuante para o holograma */
+.btn-holo {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  background: #25D366;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 15px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.btn-holo:hover {
+  transform: scale(1.1);
+  background: #20b954;
+}
